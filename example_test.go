@@ -7,8 +7,8 @@ package flag_test
 
 import (
 	"errors"
-	"flag"
 	"fmt"
+	"github.com/speedyhoon/flag"
 	"strings"
 	"time"
 )

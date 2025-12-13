@@ -5,8 +5,8 @@
 package flag_test
 
 import (
-	"flag"
 	"fmt"
+	"github.com/speedyhoon/flag"
 	"net"
 	"os"
 )

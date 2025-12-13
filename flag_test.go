@@ -6,9 +6,8 @@ package flag_test
 
 import (
 	"bytes"
-	. "flag"
 	"fmt"
-	"internal/testenv"
+	. "github.com/speedyhoon/flag"
 	"io"
 	"os"
 	"os/exec"
@@ -658,7 +657,7 @@ func TestRangeError(t *testing.T) {
 }
 
 func TestExitCode(t *testing.T) {
-	testenv.MustHaveExec(t)
+	MustHaveExec(t)
 
 	magic := 123
 	if os.Getenv("GO_CHILD_FLAG") != "" {
