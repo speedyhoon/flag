@@ -3,7 +3,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/speedyhoon/flag.svg)](https://pkg.go.dev/github.com/speedyhoon/flag)
 [![Go Report Card](https://goreportcard.com/badge/github.com/speedyhoon/flag)](https://goreportcard.com/report/github.com/speedyhoon/flag)
 
-An expansion upon Go's built-in package `flag` to support more types.
+An expansion upon Go's built-in package [`flag`](https://pkg.go.dev/flag) to support more types.
 
 ## Example:
 
