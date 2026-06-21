@@ -2,45 +2,47 @@ package flag
 
 // StringVarOptional defines a string flag with specified name, default value, and usage string.
 // The argument p points to a string variable in which to store the value of the flag.
-func (f *FlagSet) StringVarOptional(p *string, name string, value string, usage string) *bool {
-	newVal := newStringValueIsSpecified(value, p)
+func (f *FlagSet) StringVarOptional(p *string, isSet *bool, name, value, usage string) {
+	newVal := newStringValueIsSpecified(value, p, isSet)
 	f.Var(newVal, name, usage)
-	return &newVal.IsSpecified
 }
 
 // StringVarOptional defines a string flag with specified name, default value, and usage string.
 // The argument p points to a string variable in which to store the value of the flag.
 // Returns true when the flag is listed even without a value.
-func StringVarOptional(p *string, name string, value string, usage string) *bool {
-	return CommandLine.StringVarOptional(p, name, value, usage)
+func StringVarOptional(p *string, isSet *bool, name, value, usage string) {
+	CommandLine.StringVarOptional(p, isSet, name, value, usage)
 }
 
 // StringOptional defines a string flag with specified name, default value, and usage string.
 // The return value is the address of a string variable that stores the value of the flag.
-func (f *FlagSet) StringOptional(name string, value string, usage string) (*string, *bool) {
-	p, bb := new(string), new(bool)
-	f.StringVarOptional(p, name, value, usage)
-	return p, bb
+func (f *FlagSet) StringOptional(name, value, usage string) (*string, *bool) {
+	p, t := new(string), new(bool)
+	f.StringVarOptional(p, t, name, value, usage)
+	return p, t
 }
 
 // StringOptional defines a string flag with specified name, default value, and usage string.
 // The return value is the address of a string variable that stores the value of the flag.
-func StringOptional(name string, value string, usage string) (*string, *bool) {
+func StringOptional(name, value, usage string) (*string, *bool) {
 	return CommandLine.StringOptional(name, value, usage)
 }
 
 type stringValueOptional struct {
 	Value       *string
-	IsSpecified bool
+	IsSpecified *bool
 }
 
-func newStringValueIsSpecified(val string, p *string) *stringValueOptional {
+func newStringValueIsSpecified(val string, p *string, isSet *bool) *stringValueOptional {
 	*p = val
-	return &stringValueOptional{Value: p}
+	return &stringValueOptional{Value: p, IsSpecified: isSet}
 }
+
 func (s *stringValueOptional) Set(val string) error {
-	*s.Value = val
-	s.IsSpecified = true
+	*s.IsSpecified = true
+	if val != "true" {
+		*s.Value = val
+	}
 	return nil
 }
 
