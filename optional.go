@@ -44,9 +44,14 @@ func (s *stringValueOptional) Set(val string) error {
 	return nil
 }
 
-func (s *stringValueOptional) Get() any { return *s.Value }
+func (s *stringValueOptional) Get() any { return s.String() }
 
 // IsBoolFlag allows flag without requiring a string value.
 func (s *stringValueOptional) IsBoolFlag() bool { return true }
 
-func (s *stringValueOptional) String() string { return *s.Value }
+func (s *stringValueOptional) String() string {
+	if s != nil && s.Value != nil {
+		return *s.Value
+	}
+	return ""
+}
