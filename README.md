@@ -1,4 +1,4 @@
-# flag
+# flag 🏁
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/speedyhoon/flag.svg)](https://pkg.go.dev/github.com/speedyhoon/flag)
 [![Go Report Card](https://goreportcard.com/badge/github.com/speedyhoon/flag)](https://goreportcard.com/report/github.com/speedyhoon/flag)
@@ -27,6 +27,7 @@ func main() {
 	flag.Uint16Var(&o.u16, "p", 80, "network port")
 	flag.Uint32Var(&o.u32, "z", 16777216, "maximum size allowed")
 	flag.StringsVar(&o.s, "a", []string{"panda", "tiger", "monkey", "viper"}, "list of animals")
+	flag.StringVarOptional(&o.err, &o.isE, "set", "io.EOF", "default error")
 	flag.Parse()
 
 	fmt.Println(o)
@@ -42,5 +43,8 @@ type Options struct {
 	u16 uint16
 	u32 uint32
 	s   []string
+	err string
+	isE bool
 }
+
 ```
